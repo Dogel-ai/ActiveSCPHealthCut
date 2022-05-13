@@ -1,3 +1,6 @@
+# SCP Health Modifier
+This is a plugin that changes SCP's health based on the number of active players.
+
 # How to install?
 
 1. Download ``BasicPlugin.dll`` from the [releases](https://github.com/Dogel-ai/BasicPlugin/releases) page
