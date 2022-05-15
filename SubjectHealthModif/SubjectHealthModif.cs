@@ -9,11 +9,11 @@ namespace SubjectHealthModif {
         public override string Name => "SCP Health Modifier";
         public override string Author => "Dogel";
         public override Version Version => new Version(1, 0, 0);
-
+        public override string Prefix => "SubjectHealthModif";
         public override void OnEnabled() {
             try {
                 EventHandler = new EventHandlers();
-                Player.ChangingRole += EventHandler.OnRoleChange;
+                Player.Spawned += EventHandler.OnSpawn;
                 base.OnEnabled();
             } catch (Exception e) {
                 Log.Error($"There was an error loading SubjectHealthModif: {e}");
@@ -21,7 +21,7 @@ namespace SubjectHealthModif {
         }
 
         public override void OnDisabled() {
-            Player.ChangingRole -= EventHandler.OnRoleChange;
+            Player.Spawned -= EventHandler.OnSpawn;
             EventHandler = null;
             base.OnDisabled();
         }

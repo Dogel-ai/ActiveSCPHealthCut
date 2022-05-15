@@ -3,10 +3,12 @@ using Server = Exiled.API.Features.Server;
 
 namespace SubjectHealthModif {
     public class EventHandlers : Config {
-        public void OnRoleChange(ChangingRoleEventArgs ev) {
+        public void OnSpawn(SpawnedEventArgs ev) {
             if (ev.Player.IsScp) {
-                int FreeSlots = Server.PlayerCount / Modifier;
-                ev.Player.MaxHealth = (int)(ev.Player.Health / FreeSlots);
+                float hp = ev.Player.MaxHealth;
+                float Divider = Server.PlayerCount / Modifier;
+                ev.Player.Health /= Divider;
+                if (hp < ev.Player.MaxHealth) { ev.Player.Health = hp; }
             }
         }
     }
