@@ -7,9 +7,9 @@ namespace SubjectHealthModif {
             if (ev.Player.IsScp) {
                 Timing.CallDelayed(5f, () => {
                     float hp = ev.Player.MaxHealth;
-                    float Divider = Exiled.API.Features.Server.PlayerCount / Modifier;
+                    float Divider = Exiled.API.Features.Server.PlayerCount * Modifier;
                     ev.Player.Health /= Divider;
-                    if (hp < ev.Player.MaxHealth) { ev.Player.Health = hp; }
+                    if (hp < ev.Player.MaxHealth && Limit) { ev.Player.Health = hp; }
                 });
             }
         }
