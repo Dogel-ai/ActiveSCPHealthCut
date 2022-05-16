@@ -8,8 +8,8 @@ namespace SubjectHealthModif {
 
         public override string Name => "SCP Health Modifier";
         public override string Author => "Dogel";
-        public override Version Version => new Version(1, 0, 0);
         public override string Prefix => "SubjectHealthModif";
+
         public override void OnEnabled() {
             try {
                 EventHandler = new EventHandlers();
