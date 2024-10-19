@@ -1,38 +1,51 @@
 ﻿using System;
+using Exiled.API.Enums;
 using Exiled.API.Features;
-using Player = Exiled.Events.Handlers.Player;
 
-namespace SCPHealthCut {
-    public class SCPHealthCut : Plugin<Config> {
-        internal GenHandler GenHandler { get; private set; };
+// TODO: Add docs
+namespace SCPHealthCut
+{
+    public class SCPHealthCut : Plugin<Config>
+    {
+        public static readonly SCPHealthCut Singleton = new();
+
+        private EventHandler eventHandler;
 
         public override string Name => "SCP Health Cut";
         public override string Author => "Dogel";
         public override string Prefix => "SCP-HC";
-        public override Version Version => new Version(1,0,0);
+        public override Version Version => new Version(1, 0, 0);
 
-        public override void OnEnabled() {
-            try {
-                base.OnEnabled();
-            } catch (Exception e) {
-                Log.Error($"There was an error loading SCPHealthCut: {e}");
-            }
+        private SCPHealthCut() { }
+
+        public static SCPHealthCut Instance => Singleton;
+
+        public override PluginPriority Priority { get; } = PluginPriority.Last;
+
+        public override void OnEnabled()
+        {
+            RegisterEvents();
+            base.OnEnabled();
         }
 
-        public override void OnDisabled() {
+        public override void OnDisabled()
+        {
+            UnregisterEvents();
             base.OnDisabled();
         }
 
-        protected override void SubscribeEvents() {
-            GenHandler = new(Config);
+        private void RegisterEvents()
+        {
+            eventHandler = new EventHandler(Config);
 
-            Exiled.Events.Handlers.Player.Spawned += GenHandler.OnSpawned;
+            Exiled.Events.Handlers.Player.Spawned += eventHandler.OnSpawned;
         }
 
-        protected override void UnsubscribeEvents() {
-            Exiled.Events.Handlers.Player.Spawned -= GenHandler.OnSpawned;
+        private void UnregisterEvents()
+        {
+            Exiled.Events.Handlers.Player.Spawned -= eventHandler.OnSpawned;
 
-            GenHandler = null;
+            eventHandler = null;
         }
     }
 }
