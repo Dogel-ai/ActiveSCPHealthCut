@@ -1,16 +1,29 @@
 ﻿using Exiled.Events.EventArgs;
-using MEC;
+using Exiled.API.Features;
 
-namespace SubjectHealthModif {
-    public class EventHandlers : Config {
-        public void OnSpawn(SpawnedEventArgs ev) {
+// Currently, if an spc spawns and there is one player their hp is full.
+// It decreases with increasing players, but should increase with decreasing players. Make it a reverse ratio.
+// Include check for minumum and maximum hp in the config.
+namespace SCPHealthCut {
+    internal class GenHandler {
+        private Config config;
+
+        internal GenHandler(Config instance) {
+            config = instance;
+        }
+
+        internal void OnSpawned(SpawnedEventArgs ev) {  
             if (ev.Player.IsScp) {
-                Timing.CallDelayed(1.5f, () => {
-                    int hp = ev.Player.MaxHealth;
-                    float Divider = Exiled.API.Features.Server.PlayerCount * Modifier;
-                    ev.Player.Health /= Divider;
-                    if (hp < ev.Player.MaxHealth && Limit) { ev.Player.MaxHealth = hp; }
-                });
+                ev.Player.Broadcast("It works")
+                    float divider = Server.PlayerCount * Modifier;
+
+                    int hp = ev.Player.MaxHealth / divider;
+
+                    if (hp < ev.Player.MaxHealth && Limit) {
+                        ev.Player.MaxHealth = hp;
+                    }
+
+                    
             }
         }
     }
