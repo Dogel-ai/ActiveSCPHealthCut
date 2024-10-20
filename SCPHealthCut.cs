@@ -5,6 +5,9 @@ using Exiled.API.Features;
 // TODO: Add docs
 namespace SCPHealthCut
 {
+    /// <summary>
+    /// Changes SCP's health based on the number of active players.
+    /// </summary>
     public class SCPHealthCut : Plugin<Config>
     {
         public static readonly SCPHealthCut Singleton = new();
@@ -18,6 +21,9 @@ namespace SCPHealthCut
 
         private SCPHealthCut() { }
 
+        /// <summary>
+        /// Gets the only existing instance of this plugin.
+        /// </summary>
         public static SCPHealthCut Instance => Singleton;
 
         public override PluginPriority Priority { get; } = PluginPriority.Last;
@@ -34,6 +40,9 @@ namespace SCPHealthCut
             base.OnDisabled();
         }
 
+        /// <summary>
+        /// Registers the plugin events.
+        /// </summary>
         private void RegisterEvents()
         {
             eventHandler = new EventHandler(Config);
@@ -41,6 +50,9 @@ namespace SCPHealthCut
             Exiled.Events.Handlers.Player.Spawned += eventHandler.OnSpawned;
         }
 
+        /// <summary>
+        /// Unregisters the plugin events.
+        /// </summary>
         private void UnregisterEvents()
         {
             Exiled.Events.Handlers.Player.Spawned -= eventHandler.OnSpawned;

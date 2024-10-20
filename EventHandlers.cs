@@ -13,6 +13,10 @@ namespace SCPHealthCut
             config = instance;
         }
 
+        /// <summary>
+        /// Calculates and applies the health modification.
+        /// </summary>
+        /// <inheritdoc cref="Exiled.Events.Handlers.Player.OnSpawned(SpawnedEventArgs)">
         public void OnSpawned(SpawnedEventArgs ev)
         {
             Player target = ev.Player;
