@@ -1,7 +1,6 @@
 ﻿using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 
-// TODO: Add docs
 namespace SCPHealthCut
 {
     internal sealed class EventHandler

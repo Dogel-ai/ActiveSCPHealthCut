@@ -2,7 +2,6 @@
 using Exiled.API.Enums;
 using Exiled.API.Features;
 
-// TODO: Add docs
 namespace SCPHealthCut
 {
     /// <summary>
@@ -17,7 +16,7 @@ namespace SCPHealthCut
         public override string Name => "SCP Health Cut";
         public override string Author => "Dogel";
         public override string Prefix => "SCP-HC";
-        public override Version Version => new Version(1, 0, 0);
+        public override Version Version => new(1, 1, 0);
 
         private SCPHealthCut() { }
 
@@ -27,6 +26,7 @@ namespace SCPHealthCut
         public static SCPHealthCut Instance => Singleton;
 
         public override PluginPriority Priority { get; } = PluginPriority.Last;
+        public override Version RequiredExiledVersion => new(8, 12, 2);
 
         public override void OnEnabled()
         {
