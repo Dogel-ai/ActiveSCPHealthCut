@@ -22,18 +22,27 @@ namespace SCPHealthCut
             Player target = ev.Player;
             if (target.IsScp)
             {
-                // TODO: Add max and min bounds.
-                //     : Remove hurt effect.
+                // TODO: Remove hurt effect.
                 //     : Fix hp gauge.
-                float hpPerPlayer = target.MaxHealth / config.Divider;
-                float calculatedHp = hpPerPlayer * Server.PlayerCount;
+                //     : AHP cut.
+
+                float hpFraction = target.MaxHealth / config.Divider;
+                float calculatedHp = hpFraction * Server.PlayerCount;
+
+                if (calculatedHp < config.Minimum && config.Bounds)
+                {
+                    calculatedHp = config.Minimum;
+                }
+                else if (calculatedHp > config.Maximum && config.Bounds)
+                {
+                    calculatedHp = config.Maximum;
+                }
 
                 target.Health = calculatedHp;
                 target.MaxHealth = calculatedHp;
 
                 Log.Debug($"Target: {target}");
                 Log.Debug($"calculatedHp: {calculatedHp}");
-                Log.Debug($"MaxHealth: {target.MaxHealth}");
                 Log.Debug($"Health: {target.Health}");
             }
         }
