@@ -1,4 +1,6 @@
 # SCP Health Cut
+<a href="https://github.com/Dogel-ai/SCPHealthCut/releases"><img src="https://img.shields.io/github/downloads/Dogel-ai/SCPHealthCut/total?label=Downloads" alt="Downloads"></a>
+
 EXILED Plugin that changes SCP's health based on the number of active players.
 
 # How to install?
